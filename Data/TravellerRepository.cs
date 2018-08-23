@@ -6,9 +6,12 @@ using System.Collections.Generic;
 using System.Collections;
 using Cheertravel.Mobile.Interfaces;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 
 namespace Cheertravel.Mobile.Data {
 public class TravellerRepository : BaseRepository, ITravellerRepository {
+    public TravellerRepository(IConfiguration configuration):base(configuration) {
+    }
     public Traveller GetById(int id){
         //Fetch the traveller by id. If none return NULL
         using(IDbConnection dbConnection = this.Connection) {
