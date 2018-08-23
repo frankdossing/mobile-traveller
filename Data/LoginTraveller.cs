@@ -13,7 +13,10 @@ using Microsoft.Extensions.Logging;
 namespace Cheertravel.Mobile.Data {
     public class LoginTraveller {
         public int ForeignTravellerKey { get;set;}
+        [Key]
         public string Id {get;set;}
         public DateTime CreatedDateTime {get;set;}
+        public string SecurityToken {get;set;}
+        public DateTime SecurityTokenExpires {get;set;}
     }
 }

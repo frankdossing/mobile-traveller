@@ -28,9 +28,10 @@
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.CheerTravelToken"></label>
-                <input asp-for="Input.CheerTravelToken" class="form-control" />
-                <span asp-validation-for="Input.CheerTravelToken" class="text-danger"></span>
+                <label asp-for="Input.SecurityCode"></label>
+                <input asp-for="Input.SecurityCode" class="form-control" />
+                <span asp-validation-for="Input.SecurityCode" class="text-danger"></span>
+                <a href="RequestSecurityCode" class="btn btn-primary" role="button">Request Code</a>
             </div>
              <button type="submit" class="btn btn-default">Register</button>
         </form>

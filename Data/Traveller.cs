@@ -15,6 +15,7 @@ public class Traveller {
     public string MobileNo {get;set;}
     public string PhoneNo {get;set;}
     public int GroupId {get;set;}
+    public string Email {get;set;}
     public Group Group {get;set;}
 }
 }

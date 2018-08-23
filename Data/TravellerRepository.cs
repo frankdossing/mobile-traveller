@@ -22,5 +22,19 @@ public class TravellerRepository : BaseRepository, ITravellerRepository {
             },new { Id = id },splitOn: "FK_GroupId").FirstOrDefault();
         }
     }
+
+    public ICollection<Traveller> GetByEmail(string email) {
+        using(IDbConnection dbConnection = this.Connection) {
+        string sql = "SELECT * FROM mobile_vTravellers WHERE Email = @email";
+        dbConnection.Open();
+        return dbConnection.Query<Traveller,Group,Traveller>(sql,
+            (traveller, group) =>
+            {
+                traveller.Group = group;
+                return traveller;
+            },new { Email = email },splitOn: "FK_GroupId").ToList();
+        }
+ 
+    }
 }
 }

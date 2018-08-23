@@ -60,8 +60,9 @@ namespace Cheertravel.Mobile.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required]
-            [Display(Name = "Token")]
-            public string CheerTravelToken{ get; set; }
+            [StringLength(4, ErrorMessage="The Security Code must be 4 decimals")]
+            [Display(Name = "Security Code")]
+            public string SecurityCode{ get; set; }
          }
 
         public void OnGet(string returnUrl = null)
@@ -73,9 +74,9 @@ namespace Cheertravel.Mobile.Areas.Identity.Pages.Account
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             //-- Get the TUID from the travellerdetails table, based on the email and token
-            var travellerId = _cheerTravelSecurityManager.GetTravellerId(Input.Email, Input.CheerTravelToken);
+            var travellerId = _cheerTravelSecurityManager.GetTravellerId(Input.Email, Input.SecurityCode);
             if(travellerId == null) {
-                ModelState.AddModelError(string.Empty, "Token is not correct");
+                ModelState.AddModelError(string.Empty, "Security code is not correct or maybe be expired. Please request a new security token.");
                 return Page();
             }
             
@@ -99,7 +100,7 @@ namespace Cheertravel.Mobile.Areas.Identity.Pages.Account
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    //-- create a new LoginTraveller, to get the link to the TUID in the traveller-table
+                    //-- update the LoginTraveller with eventually a new email address
                     _cheerTravelSecurityManager.CreateLoginTraveller(user.NormalizedUserName, travellerId.Value);
                     return LocalRedirect(returnUrl);
                 }
