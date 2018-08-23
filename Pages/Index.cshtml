@@ -4,20 +4,26 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="container">
-    <div class="row">
+<div class="fluid-container">
+   <div class="row">
         <div class="col-xs-12 col-md-12">
-<h4>Welcome to Cheer Travel Mobile</h4>
-<p>To signup for an account, you must already have an account registered with Cheer Travel.</p>
-</div></div>
-<div class="row">
-        <div class="col-xs-12 col-md-12">
-<a asp-area="Identity" asp-page="/Account/Login" class="btn btn-default" role="button">Login</a>
-<a asp-area="Identity" asp-page="/Account/Register" class="btn btn-default" role="button">Signup</a>
-</div></div>
-    <div class="row">
-        <div class="col-xs-12 col-md-12">
-        <img class="img-responsive center-block" src="~/images/cheertravel_logo.png" style="height: 140px"/>
         </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+        <img class="img-responsive center-block" src="~/images/cheertravel_logo.png" style="height: 140px;padding-top: 10px"/>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <h4>Welcome to Cheer Travel Mobile</h4>
+            <p>To signup for an account, you must already have an account registered with Cheer Travel.</p>
+        </div>
+    </div>
+<div class="row">
+        <div class="col-xs-12 col-md-12">
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary btn-lg btn-block" role="button">Login</a>
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info btn-lg btn-block" role="button">Signup</a>
+        </div>
+    </div>
+    </div>
