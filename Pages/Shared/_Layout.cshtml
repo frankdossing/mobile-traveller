@@ -36,7 +36,7 @@
                     <li><a asp-page="/Index">Home</a></li>
                     <li><a asp-page="/Travel/Index">Travel</a></li>
                     <li><a asp-page="/Itinary/Index">Itinary</a></li>
-                    <li><a asp-page="/About">Itinary</a></li>
+                    <li><a asp-page="/About">About</a></li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
@@ -45,11 +45,11 @@
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
+    <div class="container body-content" style="margin-top: 15px">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2018 - Cheertravel - on the go!</p>
+            <a href="http://www.cheertravel.com.au" targer="_blank"><p>&copy; 2018 - Cheer Travel - on the go!</p></a>
         </footer>
     </div>
 

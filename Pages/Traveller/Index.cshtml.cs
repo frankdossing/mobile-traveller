@@ -8,23 +8,23 @@ using Cheertravel.Mobile.Data;
 using Microsoft.EntityFrameworkCore;
 using Cheertravel.Mobile.Interfaces;
 
-namespace Cheertravel.Mobile.Pages.User {
+
+namespace Cheertravel.Mobile.Pages.Traveller {
     public class IndexModel : PageModel
     {
-        private ITravellerRepository _dbContext;
-        private ISecurityManager _securityManager;
-        public IndexModel(ITravellerRepository dbContext, ISecurityManager securityManager) {
-            _dbContext = dbContext;
+        private readonly ISecurityManager _securityManager;
+        private readonly ITravellerRepository _travellerRepository;
+
+        public IndexModel(ISecurityManager securityManager, ITravellerRepository travellerRep) {
             _securityManager = securityManager;
+            _travellerRepository = travellerRep;
         }
 
-        [BindProperty]
-        public Data.Traveller LosTraveller {get;set;}
+        public Data.Traveller LosPageModel {get;set;}
         public void OnGet()
         {
-            //-- get the current logged on travel-userId
             int userId = _securityManager.GetLoggedOnTravellerId(User.Identity.Name);
-            LosTraveller = _dbContext.GetById(userId);
+            LosPageModel = _travellerRepository.GetById(userId);
         }
-    }
+   }
 }
