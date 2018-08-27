@@ -5,25 +5,27 @@
 }
 
 <div class="panel panel-default">
-        <div class="panel-heading">Membership</div>
+        <div class="panel-heading"><strong>Membership</strong></div>
         <div class="panel-body">
-            <dl class="dl-horizontal">
-            <dt>Gym</dt>
-             <dd>@Model.LosPageModel.Group.Name</dd>
-            <dt>Group</dt>
-            <dd>@Model.LosPageModel.Group.Description</dd>
-            </dl>
-            <a asp-page="/Group/{@Model.LosPageModel.Group.Id}" class="btn btn-primary btn-sm btn-block" role="button">More info</a>
+            <table class="table table-condensed">
+                <tr><td><small>Gym</small></td><td>@Model.LosPageModel.Group.OrganisationName</td></tr>
+                <tr><td><small>Contact</small></td><td>@Model.LosPageModel.Group.ContactName</td></tr>
+                <tr><td><small>Phone</small></td><td>@Model.LosPageModel.Group.ContactPhone</td></tr>
+                <tr><td><small>Group</small></td><td>@Model.LosPageModel.Group.Name</td></tr>
+            </table>
+           <a asp-page="/Group/{@Model.LosPageModel.Group.Id}" class="btn btn-primary btn-sm btn-block" role="button">More info</a>
         </div>
 </div>
 
 <div class="panel panel-default">
-    <div class="panel-heading">Upcoming trip</div>
+    <div class="panel-heading">
+        <strong>Upcoming trip</strong>
+        </div>
         <div class="panel-body">
-            <table class="table">
+            <table class="table table-condensed">
                 <tr><td><strong>Going to</strong></td><td>UNKNOWN</td></tr>
-                <tr><td>Departure date</td><td>@Model.LosPageModel.Group.DepartureDate</td></tr>
-                <tr><td>Return date</td><td>@Model.LosPageModel.Group.ReturnDate</td></tr>
+                <tr><td>Departure date</td><td>@Model.LosPageModel.Group.DepartureDate.ToShortDateString()</td></tr>
+                <tr><td>Return date</td><td>@Model.LosPageModel.Group.ReturnDate.ToShortDateString()</td></tr>
             </table>
             <a asp-page="/Travel/{@Model.LosPageModel.Group.Id}" class="btn btn-primary btn-sm btn-block" role="button">More info</a>
         </div>
