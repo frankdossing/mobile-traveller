@@ -13,13 +13,18 @@
                 <tr><td><small>Phone</small></td><td>@Model.LosPageModel.Group.ContactPhone</td></tr>
                 <tr><td><small>Group</small></td><td>@Model.LosPageModel.Group.Name</td></tr>
             </table>
-           <a asp-page="/Group/{@Model.LosPageModel.Group.Id}" class="btn btn-primary btn-sm btn-block" role="button">More info</a>
+           <a asp-page="/Group/{@Model.LosPageModel.Group.Id}" class="btn btn-primary btn-md btn-block" role="button">More info</a>
         </div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-danger">
     <div class="panel-heading">
-        <strong>Upcoming trip</strong>
+        <span class="badge badge-alert pull-right">!</span>
+        @{ if(@Model.LosPageModel.Group.DepartureDate < DateTime.Now) {
+            <strong>Last trip done</strong>
+        } else {
+            <strong>Upcoming trip</strong>
+        };}
         </div>
         <div class="panel-body">
             <table class="table table-condensed">
@@ -27,6 +32,6 @@
                 <tr><td>Departure date</td><td>@Model.LosPageModel.Group.DepartureDate.ToShortDateString()</td></tr>
                 <tr><td>Return date</td><td>@Model.LosPageModel.Group.ReturnDate.ToShortDateString()</td></tr>
             </table>
-            <a asp-page="/Travel/{@Model.LosPageModel.Group.Id}" class="btn btn-primary btn-sm btn-block" role="button">More info</a>
+            <a asp-page="/Travel/{@Model.LosPageModel.Group.Id}" class="btn btn-primary btn-md btn-block" role="button">More info</a>
         </div>
 </div>
