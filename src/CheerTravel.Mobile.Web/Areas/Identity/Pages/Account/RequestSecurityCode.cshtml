@@ -24,12 +24,12 @@
                 <input asp-for="Input.Firstname" class="form-control" />
                 <span asp-validation-for="Input.Firstname" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-default">Request Security Code</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Request Security Code</button>
         </form>
         @{             
             if(@Model.Status == "ok")  {
             <div>
-            <p>An email have been sent to your email-address, with a security code. The security code is
+            <p class="bg-success">An email have been sent to your email-address, with a security code. The security code is
                 valid for 2 hours. Locate the security code, and head back to the register page
                 to finish you registration.
             </p>
@@ -38,7 +38,7 @@
             }
             if(@Model.Status == "nomatch") {
             <div>
-            <p>The system was unable to find a match for your email in the system. Please contact
+            <p class="bg-danger">The system was unable to find a match for your email in the system. Please contact
                 CheerTravel support for help
             </p>
             </div>

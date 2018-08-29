@@ -29,11 +29,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.SecurityCode"></label>
+                <div class="input-group">
                 <input asp-for="Input.SecurityCode" class="form-control" />
-                <span asp-validation-for="Input.SecurityCode" class="text-danger"></span>
-                <a href="RequestSecurityCode" class="btn btn-primary" role="button">Request Code</a>
+                <span class="input-group-btn">
+                <a href="RequestSecurityCode" class="btn btn-info" role="button">Request Code</a>
+                </span>
+                </div>
+                <span asp-validation-for="Input.SecurityCode" class="text-danger">
+                </span>
             </div>
-             <button type="submit" class="btn btn-default">Register</button>
+             <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
         </form>
     </div>
 </div>
