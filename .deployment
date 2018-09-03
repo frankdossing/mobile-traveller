@@ -1,2 +1,2 @@
 [config]
-project = src/CheerTravel.Mobile.Web/CheerTravel.Mobile.Web.proj
+project = src/CheerTravel.Mobile.Web/CheerTravel.Mobile.Web.csproj
