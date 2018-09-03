@@ -14,15 +14,6 @@ namespace CheerTravel.Mobile.Tests.Unit
         [Fact]  
         public void Test1()
         {
-            var contextMoq = new Mock<IAccountRepository>();
-            var unitOfWork = new Mock<IDapperUnitOfWork>();
-            var emailSender = new Mock<IEmailSender>();
-            var logger = new Mock<ILogger<SecurityManager>>();
-
-            var securityManager = new SecurityManager(contextMoq.Object, emailSender.Object, unitOfWork.Object, logger.Object);
-            var result = securityManager.EmailSecurityCodeToNewUserAsync("fake","frank");
-            Assert.True(result);
-
         }
     }
 }
