@@ -43,7 +43,11 @@ namespace CheerTravel.Mobile.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<ISecurityManager, SecurityManager>();
-            services.AddScoped<ITravellerRepository, TravellerRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IDapperUnitOfWork>( factory => { 
+                return new DapperUnitOfWork(Configuration.GetConnectionString("SqlDefaultConnection"));
+            });
+            //services.AddScoped<ITravellerRepository, TravellerRepository>();
             services.AddMvc()
                 .AddRazorPagesOptions( options => 
                 {

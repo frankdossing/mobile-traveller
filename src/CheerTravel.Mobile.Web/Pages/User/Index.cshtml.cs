@@ -24,7 +24,7 @@ namespace CheerTravel.Mobile.Web.Pages.User {
         {
             //-- get the current logged on travel-userId
             int userId = _securityManager.GetLoggedOnTravellerId(User.Identity.Name);
-            LosTraveller = _dbContext.GetById(userId);
+            LosTraveller = _dbContext.Find(userId);
         }
     }
 }
