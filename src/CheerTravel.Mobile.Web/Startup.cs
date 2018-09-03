@@ -44,10 +44,10 @@ namespace CheerTravel.Mobile.Web
 
             services.AddScoped<ISecurityManager, SecurityManager>();
             services.AddScoped<IAccountRepository, AccountRepository>();
+            //-- Return the connection-string from the appsettings.json file for the DapperUnitOfWork interface
             services.AddScoped<IDapperUnitOfWork>( factory => { 
                 return new DapperUnitOfWork(Configuration.GetConnectionString("SqlDefaultConnection"));
             });
-            //services.AddScoped<ITravellerRepository, TravellerRepository>();
             services.AddMvc()
                 .AddRazorPagesOptions( options => 
                 {

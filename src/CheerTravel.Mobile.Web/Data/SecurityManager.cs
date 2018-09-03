@@ -45,7 +45,7 @@ public class SecurityManager:ISecurityManager {
             return login.ForeignTravellerKey;
         }
 
-    public async Task<bool> EmailSecurityCodeToNewUser(string email,string firstname) {
+    public async Task<bool> EmailSecurityCodeToNewUserAsync(string email,string firstname) {
         //-- validate that the email and firstname is to be found in the travellerdetails table
         //-- if yes, generate a new security-token with a time-to-live = 2 hours. Email the 
         //-- security token to the email. 

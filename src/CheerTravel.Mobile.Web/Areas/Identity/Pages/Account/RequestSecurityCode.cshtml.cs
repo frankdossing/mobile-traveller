@@ -58,7 +58,7 @@ namespace CheerTravel.Mobile.Web.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/Register");
             //-- Call the security-manager-email send, to actually send an email to the user with the requested security code
             if(ModelState.IsValid) {
-                 var result = await _cheerTravelSecurityManager.EmailSecurityCodeToNewUser(Input.Email, Input.Firstname);
+                 var result = await _cheerTravelSecurityManager.EmailSecurityCodeToNewUserAsync(Input.Email, Input.Firstname);
                  if(result) {
                    Status = "ok";
                  } else {

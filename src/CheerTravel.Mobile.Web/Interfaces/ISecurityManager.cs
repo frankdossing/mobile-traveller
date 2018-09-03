@@ -7,6 +7,6 @@ namespace CheerTravel.Mobile.Web.Interfaces {
 
         int GetLoggedOnTravellerId(string userId);
 
-        Task<bool> EmailSecurityCodeToNewUser(string email,string firstname);
+        Task<bool> EmailSecurityCodeToNewUserAsync(string email,string firstname);
     }
 }
