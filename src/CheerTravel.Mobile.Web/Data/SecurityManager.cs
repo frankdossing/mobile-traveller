@@ -45,7 +45,7 @@ public class SecurityManager:ISecurityManager {
             return login.ForeignTravellerKey;
         }
 
-    public async Task<bool> EmailSecurityCodeToNewUserAsync(string email,string firstname) {
+    public async Task<bool> EmailSecurityCodeToNewUserAsync(string email,string firstname, string returnUrl) {
         //-- validate that the email and firstname is to be found in the travellerdetails table
         //-- if yes, generate a new security-token with a time-to-live = 2 hours. Email the 
         //-- security token to the email. 
@@ -58,10 +58,12 @@ public class SecurityManager:ISecurityManager {
             DateTime expiraryDateTime = DateTime.Now.AddHours(2);
             var subject = "CheerTravel Mobile Security Code";
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<h2>Welcome to CheerTravel Mobile App.</h2>");
-            sb.AppendLine(string.Format("<p>Your security code to create your account is: <b>{0}</b>",securityCode));
+            sb.AppendLine("<h2>Welcome to the CheerTravel Mobile App.</h2>");
+            sb.AppendLine(string.Format("<p>Your security code to create your account is: <b>{0}</b></p>",securityCode));
             sb.AppendLine("<i>Note, that the code will expire in 2 hours");
+            sb.AppendLine(string.Format("<a href='{0}'>Return to sign-up page</a>",returnUrl));
             sb.AppendLine("<div></div>");
+
             await _emailService.SendEmailAsync(email, subject, sb.ToString());
 
             //-- create or update the LoginTraveller with the new security code
@@ -70,16 +72,14 @@ public class SecurityManager:ISecurityManager {
             lt = _accountRepository.FindByFK(traveller.TUID);
             if(lt == null) {
                 lt = new LoginTraveller() { ForeignTravellerKey = traveller.TUID, SecurityToken = securityCode, SecurityTokenExpires = expiraryDateTime, Id = email};
+                _accountRepository.Add(lt);
             } else {
                 lt.SecurityToken = securityCode;
                 lt.SecurityTokenExpires = DateTime.Now.AddHours(2).ToUniversalTime();
             }
-            _accountRepository.Add(lt);
-            //_dbContext.LoginTravellers.Add(lt);
-            //_dbContext.SaveChanges();
             _accountRepository.SaveChanges();
-
-            return true;
+            //_dbContext.LoginTravellers.Add(lt);
+            //_dbContext.SaveChanges(); _accountRepository.SaveChanges(); return true;
             }
         return false;
     }

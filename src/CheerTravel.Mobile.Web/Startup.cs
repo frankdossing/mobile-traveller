@@ -13,6 +13,8 @@ using CheerTravel.Mobile.Web.Data;
 using CheerTravel.Mobile.Web.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CheerTravel.Mobile.Web.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace CheerTravel.Mobile.Web
 {
@@ -48,6 +50,10 @@ namespace CheerTravel.Mobile.Web
             services.AddScoped<IDapperUnitOfWork>( factory => { 
                 return new DapperUnitOfWork(Configuration.GetConnectionString("SqlDefaultConnection"));
             });
+
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+
             services.AddMvc()
                 .AddRazorPagesOptions( options => 
                 {
