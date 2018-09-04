@@ -19,12 +19,17 @@ namespace CheerTravel.Mobile.Web.Pages.User {
         }
 
         [BindProperty]
-        public Data.Traveller LosTraveller  {get;set;}
+        public Traveller LosTraveller  {get;set;}
         public void OnGet()
         {
+            try {
             //-- get the current logged on travel-userId
             int userId = _securityManager.GetLoggedOnTravellerId(User.Identity.Name);
             LosTraveller = _unitOfWork.TravellerRepository.Find(userId);
+            }
+            catch(Exception ex) {
+                LosTraveller = new Traveller() { Firstname = ex.Message};
+            }
         }
     }
 }
