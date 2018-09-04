@@ -30,12 +30,14 @@ namespace CheerTravel.Mobile.Web.Pages.User {
             try {
             //-- get the current logged on travel-userId
             int userId = _securityManager.GetLoggedOnTravellerId(User.Identity.Name);
+            LosTraveller = new Traveller() { Firstname = userId.ToString()};
+            /* 
             Traveller t = _unitOfWork.TravellerRepository.Find(userId);
             if(t == null)  {
                 LosTraveller = new Traveller() { Firstname = "No user found"};
             }
             LosTraveller = t;
-
+            */
             }
             catch(Exception ex) {
                 LosTraveller = new Traveller() { Firstname = ex.Message};
