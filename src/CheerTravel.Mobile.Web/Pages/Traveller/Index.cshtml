@@ -36,9 +36,10 @@
             <a asp-page="/Travel/{@Model.LosPageModel.Group.Id}" class="btn btn-primary btn-md btn-block" role="button">More info</a>
         </div>
 </div>
-} 
+} else { 
 <div class="alert alert-warning">
     <h4>..uuhh, nooo</h4>
     <p>Sorry, but we can't find your account in the system. Please contact Cheer Travel support</p>
 </div>
+}
 }
