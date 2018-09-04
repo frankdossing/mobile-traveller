@@ -14,8 +14,13 @@ namespace CheerTravel.Mobile.Web.Pages.User {
         private ISecurityManager _securityManager;
         private IDapperUnitOfWork _unitOfWork;
         public IndexModel(ISecurityManager securityManager,IDapperUnitOfWork uow) {
+            try {
             _securityManager = securityManager;
             _unitOfWork = uow;
+            }
+            catch(Exception ex) {
+                //silent catch error
+            }
         }
 
         [BindProperty]
@@ -25,7 +30,12 @@ namespace CheerTravel.Mobile.Web.Pages.User {
             try {
             //-- get the current logged on travel-userId
             int userId = _securityManager.GetLoggedOnTravellerId(User.Identity.Name);
-            LosTraveller = _unitOfWork.TravellerRepository.Find(userId);
+            Traveller t = _unitOfWork.TravellerRepository.Find(userId);
+            if(t == null)  {
+                LosTraveller = new Traveller() { Firstname = "No user found"};
+            }
+            LosTraveller = t;
+
             }
             catch(Exception ex) {
                 LosTraveller = new Traveller() { Firstname = ex.Message};
