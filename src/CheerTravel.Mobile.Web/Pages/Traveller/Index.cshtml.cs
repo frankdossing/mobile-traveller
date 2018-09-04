@@ -21,7 +21,7 @@ namespace CheerTravel.Mobile.Web.Pages.Traveller {
             _securityManager = securityManager;
             _dapperUnitOfWork = travellerRep;
             _logger = logger;
-            _logger.LogDebug("Constructor started up on Traveller Page");
+            _logger.LogWarning("Constructor started up on Traveller Page");
         }
 
         [BindProperty]
@@ -29,7 +29,7 @@ namespace CheerTravel.Mobile.Web.Pages.Traveller {
 
         public void OnGet()
         {
-            _logger.LogDebug("On get invoked");
+            _logger.LogWarning("On get invoked");
             int userId = _securityManager.GetLoggedOnTravellerId(User.Identity.Name);
             //LosPageModel = _dapperUnitOfWork.TravellerRepository.Find(userId);
             LosPageModel = null;
