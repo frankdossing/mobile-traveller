@@ -12,16 +12,19 @@ namespace CheerTravel.Mobile.Web.Pages.User {
     public class IndexModel : PageModel
     {
         private ISecurityManager _securityManager;
-        public IndexModel(ISecurityManager securityManager) {
+        private IDapperUnitOfWork _unitOfWork;
+        public IndexModel(ISecurityManager securityManager,IDapperUnitOfWork uow) {
             _securityManager = securityManager;
+            _unitOfWork = uow;
         }
 
         [BindProperty]
-        public string UserName {get;set;}
+        public Data.Traveller LosTraveller  {get;set;}
         public void OnGet()
         {
             //-- get the current logged on travel-userId
-            UserName = User.Identity.Name;
+            int userId = _securityManager.GetLoggedOnTravellerId(User.Identity.Name);
+            LosTraveller = _unitOfWork.TravellerRepository.Find(userId);
         }
     }
 }
