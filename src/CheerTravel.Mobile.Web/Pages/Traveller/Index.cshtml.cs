@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace CheerTravel.Mobile.Web.Pages.Travellers {
+namespace CheerTravel.Mobile.Web.Pages.Traveller {
     public class IndexModel : PageModel
     {
         private readonly ISecurityManager _securityManager;
@@ -25,13 +25,13 @@ namespace CheerTravel.Mobile.Web.Pages.Travellers {
         }
 
         [BindProperty]
-        public Traveller LosPageModel {get;set;}
+        public Data.Traveller LosPageModel {get;set;}
 
         public void OnGet()
         {
             _logger.LogWarning("On get invoked");
             int userId = _securityManager.GetLoggedOnTravellerId(User.Identity.Name);
-            LosPageModel = _dapperUnitOfWork.TravellerRepository.Find(userId);
+            LosPageModel  =  _dapperUnitOfWork.TravellerRepository.Find(userId);
         }
    }
 }

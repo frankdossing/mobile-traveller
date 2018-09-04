@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Traveller Home";
 }
+@{ if(@Model.LosPageModel != null) 
+{
 <div class="panel panel-default">
         <div class="panel-heading"><strong>Membership</strong></div>
         <div class="panel-body">
@@ -34,3 +36,9 @@
             <a asp-page="/Travel/{@Model.LosPageModel.Group.Id}" class="btn btn-primary btn-md btn-block" role="button">More info</a>
         </div>
 </div>
+} 
+<div class="alert alert-warning">
+    <h4>..uuhh, nooo</h4>
+    <p>Sorry, but we can't find your account in the system. Please contact Cheer Travel support</p>
+</div>
+}
