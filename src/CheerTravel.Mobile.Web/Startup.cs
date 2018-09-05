@@ -45,7 +45,7 @@ namespace CheerTravel.Mobile.Web
                     Configuration.GetConnectionString("SqlDefaultConnection")));
 
             services.AddSingleton<IFileProvider>(
-                new PhysicalFileProvider(Directory.GetCurrentDirectory()));
+                new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();

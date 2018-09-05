@@ -28,8 +28,8 @@
         </form>
         @{             
             if(@Model.Status == "ok")  {
-            <div>
-            <p class="bg-success">An email have been sent to your email-address, with a security code. The security code is
+            <div class="alert alert-success">
+            <p>An email have been sent to your email-address, with a security code. The security code is
                 valid for 2 hours. Locate the security code, and head back to the register page
                 to finish you registration.
             </p>
@@ -37,8 +37,8 @@
             </div>
             }
             if(@Model.Status == "nomatch") {
-            <div>
-            <p class="bg-danger">The system was unable to find a match for your email in the system. Please contact
+            <div class="alert alert-danger">
+            <p>The system was unable to find a match for your email in the system. Please contact
                 CheerTravel support for help
             </p>
             </div>
