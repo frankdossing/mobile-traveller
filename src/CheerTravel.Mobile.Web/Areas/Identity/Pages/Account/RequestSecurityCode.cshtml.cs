@@ -55,7 +55,7 @@ namespace CheerTravel.Mobile.Web.Areas.Identity.Pages.Account
         }
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            string mailUrl = Url.ActionContext.HttpContext.Request.Scheme; 
+            string mailUrl = Request.Scheme + "://" + Request.Host.Value + "/Identity/Account/Register"; 
             returnUrl = returnUrl ?? Url.Content("~/Register");
             //-- Call the security-manager-email send, to actually send an email to the user with the requested security code
             if(ModelState.IsValid) {

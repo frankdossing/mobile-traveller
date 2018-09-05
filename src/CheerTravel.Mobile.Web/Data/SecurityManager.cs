@@ -13,11 +13,13 @@ public class SecurityManager:ISecurityManager {
     private readonly IDapperUnitOfWork _dapperUnitOfWork;
     private readonly IEmailSender _emailService;
     private readonly ILogger<SecurityManager> _logger;
-    public SecurityManager(IAccountRepository accountRepository,IEmailSender eService, IDapperUnitOfWork dapperUnitOfWork, ILogger<SecurityManager> logger) {
+    private readonly ISiteHelper _siteHelper;
+    public SecurityManager(IAccountRepository accountRepository,IEmailSender eService, IDapperUnitOfWork dapperUnitOfWork, ILogger<SecurityManager> logger, ISiteHelper helper) {
         _accountRepository= accountRepository;
         _emailService = eService;
         _dapperUnitOfWork = dapperUnitOfWork;
         _logger = logger;
+        _siteHelper = helper;
     }
     public int? GetTravellerId(string email, string securityCode) {
         //LoginTraveller lt = _accountRepository.GetTravellers.Where( x => x.Id == email && x.SecurityToken == securityCode && x.SecurityTokenExpires > DateTime.Now.ToUniversalTime()).FirstOrDefault();
@@ -49,24 +51,13 @@ public class SecurityManager:ISecurityManager {
         //-- validate that the email and firstname is to be found in the travellerdetails table
         //-- if yes, generate a new security-token with a time-to-live = 2 hours. Email the 
         //-- security token to the email. 
-
+        try {
         //-- lookup email and firstname from travellerDetails table
         string securityCode = GenerateSecurityCode();
         var traveller = _dapperUnitOfWork.TravellerRepository.GetByEmail(email).Where( x => x.Firstname == firstname).FirstOrDefault();
         if(traveller != null && traveller.Firstname.ToLower() == firstname.ToLower()) {
-            //-- send the email
-            DateTime expiraryDateTime = DateTime.Now.AddHours(2);
-            var subject = "CheerTravel Mobile Security Code";
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<h2>Welcome to the CheerTravel Mobile App.</h2>");
-            sb.AppendLine(string.Format("<p>Your security code to create your account is: <b>{0}</b></p>",securityCode));
-            sb.AppendLine("<i>Note, that the code will expire in 2 hours");
-            sb.AppendLine(string.Format("<a href='{0}'>Return to sign-up page</a>",returnUrl));
-            sb.AppendLine("<div></div>");
-
-            await _emailService.SendEmailAsync(email, subject, sb.ToString());
-
             //-- create or update the LoginTraveller with the new security code
+            DateTime expiraryDateTime = DateTime.Now.AddHours(2);
             LoginTraveller lt; 
             //lt = _accountRepository.LoginTravellers.Where( x=> x.ForeignTravellerKey == traveller.TUID).FirstOrDefault();
             lt = _accountRepository.FindByFK(traveller.TUID);
@@ -77,11 +68,26 @@ public class SecurityManager:ISecurityManager {
                 lt.SecurityToken = securityCode;
                 lt.SecurityTokenExpires = DateTime.Now.AddHours(2).ToUniversalTime();
             }
+            //--persist the changes to the DB
             _accountRepository.SaveChanges();
-            //_dbContext.LoginTravellers.Add(lt);
-            //_dbContext.SaveChanges(); _accountRepository.SaveChanges(); return true;
+
+            //-- lastly, send an email to the new user, with the security-token
+            await EmailSecurityTokenToUserAsync(email, securityCode, returnUrl); 
+            return true;
             }
+        }
+        catch(Exception ex) {
+            _logger.LogWarning(ex.Message);
+            throw ex;
+        }
         return false;
+    }
+
+    private async Task EmailSecurityTokenToUserAsync(string email, string securityCode, string returnUrl) {
+            //-- send the email
+            var template = _siteHelper.ReadFileContent("Helpers\\email-token.html").Replace("%token%",securityCode).Replace("%returnUrl%",returnUrl);
+            var subject = "CheerTravel Mobile Security Code";
+            await _emailService.SendEmailAsync(email, subject, template);
     }
 
     private string GenerateSecurityCode() {

@@ -13,8 +13,11 @@ using CheerTravel.Mobile.Web.Data;
 using CheerTravel.Mobile.Web.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using CheerTravel.Mobile.Web.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using System.IO;
+using CheerTravel.Mobile.Web.Helpers;
 
 namespace CheerTravel.Mobile.Web
 {
@@ -41,6 +44,9 @@ namespace CheerTravel.Mobile.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("SqlDefaultConnection")));
 
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(Directory.GetCurrentDirectory()));
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -51,6 +57,7 @@ namespace CheerTravel.Mobile.Web
                 return new DapperUnitOfWork(Configuration.GetConnectionString("SqlDefaultConnection"));
             });
 
+            services.AddSingleton<ISiteHelper, SiteHelper>();
             services.AddSingleton<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
 

@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6342F469-49D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheerTravel.Mobile.Web", "src\CheerTravel.Mobile.Web\CheerTravel.Mobile.Web.csproj", "{2D7FCD07-8272-443E-99F8-40BDCE82E7FA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4D354023-D1B2-49BD-82DD-44AAD0FC1BDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheerTravel.Mobile.Web.Tests.Unit", "tests\CheerTravel.Mobile.Web.Tests.Unit\CheerTravel.Mobile.Web.Tests.Unit.csproj", "{7F95CEAD-AE9E-441F-80F1-13D51A6FEA40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +36,21 @@ Global
 		{2D7FCD07-8272-443E-99F8-40BDCE82E7FA}.Release|x64.Build.0 = Release|Any CPU
 		{2D7FCD07-8272-443E-99F8-40BDCE82E7FA}.Release|x86.ActiveCfg = Release|Any CPU
 		{2D7FCD07-8272-443E-99F8-40BDCE82E7FA}.Release|x86.Build.0 = Release|Any CPU
+		{7F95CEAD-AE9E-441F-80F1-13D51A6FEA40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F95CEAD-AE9E-441F-80F1-13D51A6FEA40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F95CEAD-AE9E-441F-80F1-13D51A6FEA40}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7F95CEAD-AE9E-441F-80F1-13D51A6FEA40}.Debug|x64.Build.0 = Debug|Any CPU
+		{7F95CEAD-AE9E-441F-80F1-13D51A6FEA40}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7F95CEAD-AE9E-441F-80F1-13D51A6FEA40}.Debug|x86.Build.0 = Debug|Any CPU
+		{7F95CEAD-AE9E-441F-80F1-13D51A6FEA40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F95CEAD-AE9E-441F-80F1-13D51A6FEA40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F95CEAD-AE9E-441F-80F1-13D51A6FEA40}.Release|x64.ActiveCfg = Release|Any CPU
+		{7F95CEAD-AE9E-441F-80F1-13D51A6FEA40}.Release|x64.Build.0 = Release|Any CPU
+		{7F95CEAD-AE9E-441F-80F1-13D51A6FEA40}.Release|x86.ActiveCfg = Release|Any CPU
+		{7F95CEAD-AE9E-441F-80F1-13D51A6FEA40}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2D7FCD07-8272-443E-99F8-40BDCE82E7FA} = {6342F469-49D7-47A9-80B7-4B2A6C47AB3E}
+		{7F95CEAD-AE9E-441F-80F1-13D51A6FEA40} = {4D354023-D1B2-49BD-82DD-44AAD0FC1BDE}
 	EndGlobalSection
 EndGlobal
