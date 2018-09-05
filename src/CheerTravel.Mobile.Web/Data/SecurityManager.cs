@@ -72,7 +72,7 @@ public class SecurityManager:ISecurityManager {
             _accountRepository.SaveChanges();
 
             //-- lastly, send an email to the new user, with the security-token
-            //await EmailSecurityTokenToUserAsync(email, securityCode, returnUrl); 
+            await EmailSecurityTokenToUserAsync(email, securityCode, returnUrl); 
             return true;
             }
         }
