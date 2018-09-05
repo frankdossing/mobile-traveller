@@ -1,6 +1,9 @@
+using System.Threading.Tasks;
+using System;
+
 namespace CheerTravel.Mobile.Web.Interfaces {
     public interface ISiteHelper {
         string ReadFileContent(string fileName);
-        string GetResource(string resourceName);
+        Task<string> GetResourceAsync(string resourceName);
     }
 }
