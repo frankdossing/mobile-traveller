@@ -3,13 +3,17 @@ using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace CheerTravel.Mobile.Web.Services
 {
     public class EmailSender : IEmailSender
     {
-        public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
+        private readonly ILogger<EmailSender> _logger;
+
+        public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor, ILogger<EmailSender> logger)
         {
+            _logger = logger;
             Options = optionsAccessor.Value;
         }
 
@@ -17,6 +21,7 @@ namespace CheerTravel.Mobile.Web.Services
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
+            _logger.LogDebug("EmailSender configuration: Key:" + Options.SendGridKey);
             return Execute(Options.SendGridKey, subject, message, email);
         }
 
