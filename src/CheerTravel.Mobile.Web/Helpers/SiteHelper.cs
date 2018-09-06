@@ -20,15 +20,12 @@ namespace CheerTravel.Mobile.Web.Helpers {
             }
         }
 
-        public string ReadFileContent(string fileName) {
+        public async Task<string> ReadFileContentAsync(string fileName) {
+            string content = "";
             using(StreamReader reader = File.OpenText(fileName)) {
-                string fileContent = reader.ReadToEnd();
-                if (fileContent != null && fileContent != "")
-                {
-                    return fileContent;
+                content =  await reader.ReadToEndAsync();
                 }
+                return content;
             }               
-            return null;
         }
     }
-}
