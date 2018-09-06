@@ -21,13 +21,14 @@ namespace CheerTravel.Mobile.Web.Helpers {
         }
 
         public string ReadFileContent(string fileName) {
-            IFileInfo file = _fileProvider.GetFileInfo(fileName);
-            string fileOutput;
-            using(var stream = file.CreateReadStream())
-                using(var reader = new StreamReader(stream)) {
-                    fileOutput = reader.ReadToEnd();
+            using(StreamReader reader = File.OpenText(fileName)) {
+                string fileContent = reader.ReadToEnd();
+                if (fileContent != null && fileContent != "")
+                {
+                    return fileContent;
                 }
-            return fileOutput;                
+            }               
+            return null;
         }
     }
 }
