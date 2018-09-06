@@ -86,10 +86,10 @@ public class SecurityManager:ISecurityManager {
     private async Task EmailSecurityTokenToUserAsync(string email, string securityCode, string returnUrl) {
             //-- send the email
             //var template = await _siteHelper.GetResourceAsync("email-token.html");
-            var template = _siteHelper.ReadFileContent("/wwwroot/templates/email-token.html");
+            var template = _siteHelper.ReadFileContent("wwwroot/templates/email-token.html");
             var output = template.Replace("%token%",securityCode).Replace("%returnUrl%",returnUrl);
             var subject = "CheerTravel Mobile Security Code";
-            await _emailService.SendEmailAsync(email, subject, template);
+            await _emailService.SendEmailAsync(email, subject, output);
     }
 
     private string GenerateSecurityCode() {
