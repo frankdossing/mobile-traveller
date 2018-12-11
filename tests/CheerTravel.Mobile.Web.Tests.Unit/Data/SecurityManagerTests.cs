@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System;
+using System.Threading.Tasks;
 
 namespace CheerTravel.Mobile.Web.Tests.Unit {
 
@@ -41,7 +42,7 @@ namespace CheerTravel.Mobile.Web.Tests.Unit {
             travellerCollection.Add(fakeTraveller);
             travellerRep.Setup( x => x.GetByEmail(It.IsAny<string>())).Returns(travellerCollection);
             dapperUOW.Setup( x => x.TravellerRepository).Returns(travellerRep.Object);
-            helper.Setup( x => x.ReadFileContent(It.IsAny<string>())).Returns("se");
+            helper.Setup( x => x.ReadFileContentAsync(It.IsAny<string>())).Returns(Task<string>.FromResult("se"));
 
             //-- act
             SecurityManager sm = new SecurityManager(accountRep.Object, emailer.Object, dapperUOW.Object, logger.Object,helper.Object);
@@ -68,7 +69,7 @@ namespace CheerTravel.Mobile.Web.Tests.Unit {
             travellerCollection.Add(fakeTraveller);
             travellerRep.Setup( x => x.GetByEmail(It.IsAny<string>())).Returns(travellerCollection);
             dapperUOW.Setup( x => x.TravellerRepository).Returns(travellerRep.Object);
-            helper.Setup( x => x.ReadFileContent(It.IsAny<string>())).Returns("se");
+            helper.Setup( x => x.ReadFileContentAsync(It.IsAny<string>())).Returns(Task<string>.FromResult("se"));
             //-- act
             SecurityManager sm = new SecurityManager(accountRep.Object, emailer.Object, dapperUOW.Object, logger.Object,helper.Object);
             var result = sm.EmailSecurityCodeToNewUserAsync("phony", "tester", "http://returnvalue" );
