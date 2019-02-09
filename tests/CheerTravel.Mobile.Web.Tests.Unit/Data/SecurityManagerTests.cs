@@ -77,7 +77,5 @@ namespace CheerTravel.Mobile.Web.Tests.Unit {
             Assert.True(result.Result);
             Assert.True(lt.SecurityToken != String.Empty,"Security Token should not be empty");
         }
-
-
     }
 }
