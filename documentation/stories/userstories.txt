@@ -1,0 +1,10 @@
+As a traveller
+I want to be able to see my next trip as a summary
+so that I know when to traveller
+
+Conditions:
+
+Pre:
+Travller already logged on
+
+
